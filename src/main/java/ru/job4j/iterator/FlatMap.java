@@ -15,10 +15,8 @@ public class FlatMap implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (!cursor.hasNext()) {
-            while (data.hasNext() && !cursor.hasNext()) {
-                cursor = data.next();
-            }
+        while (data.hasNext() && !cursor.hasNext()) {
+            cursor = data.next();
         }
         return cursor.hasNext();
     }
