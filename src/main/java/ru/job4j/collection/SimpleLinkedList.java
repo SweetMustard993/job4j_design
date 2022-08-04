@@ -15,7 +15,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public void add(E value) {
         Node<E> tempLast = last;
-        Node<E> newNode = new Node<>(tempLast, value, null);
+        Node<E> newNode = new Node<>(value, null);
         last = newNode;
         if (tempLast == null) {
             first = newNode;
@@ -73,12 +73,10 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     class Node<E> {
         E item;
         Node<E> next;
-        Node<E> prev;
 
-        Node(Node<E> prev, E element, Node<E> next) {
+        Node(E element, Node<E> next) {
             this.item = element;
             this.next = next;
-            this.prev = prev;
         }
     }
 }
