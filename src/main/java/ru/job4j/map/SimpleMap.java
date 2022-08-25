@@ -58,7 +58,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         int index = -1;
         boolean mapEntryValidate = false;
         if (key == null) {
-            rsl = table[0].key == key ? table[0].value : null;
+            rsl = table[0].key == null ? table[0].value : null;
         } else {
             index = hash(key.hashCode() & table.length - 1);
             mapEntryValidate = (table[index] != null) && (table[index].key != null);
@@ -112,9 +112,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
             @Override
             public K next() {
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
