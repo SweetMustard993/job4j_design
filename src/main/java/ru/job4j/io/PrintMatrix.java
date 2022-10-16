@@ -1,6 +1,8 @@
 package ru.job4j.io;
 
+import javax.imageio.IIOException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import static ru.job4j.io.MatrixIO.multiple;
 
@@ -9,7 +11,7 @@ public class PrintMatrix {
         try (FileOutputStream out = new FileOutputStream("multiple table.txt")) {
             out.write(multiple(11).getBytes());
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
