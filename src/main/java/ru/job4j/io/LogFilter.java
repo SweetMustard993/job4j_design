@@ -15,7 +15,7 @@ public class LogFilter {
         try (BufferedReader in = new BufferedReader(new FileReader("log.txt"))) {
             rsl = in.lines()
                     .map(l -> new ArrayList<String>(Arrays.asList(l.split(" "))))
-                    .filter(l -> l.get(l.size() - 2).equals("404"))
+                    .filter(l -> "404".equals(l.get(l.size() - 2)))
                     .map(l -> l.stream().collect(Collectors.joining(" ")))
                     .collect(Collectors.toList());
 
@@ -28,6 +28,6 @@ public class LogFilter {
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("log.txt");
-        log.forEach(System.out::println);
+        System.out.println(log);
     }
 }
