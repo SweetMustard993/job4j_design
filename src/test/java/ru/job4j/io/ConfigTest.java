@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -41,6 +42,13 @@ class ConfigTest {
     @Test
     void whenPairWithWrongArgument() throws IllegalArgumentException {
         String path = "./data/with_wrong_argument.properties";
+        Config config = new Config(path);
+        Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
+    }
+
+    @Test
+    void whenPairWithWrongKeyArgument() throws IllegalArgumentException {
+        String path = "./data/with_wrong_key_argument.properties";
         Config config = new Config(path);
         Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
     }

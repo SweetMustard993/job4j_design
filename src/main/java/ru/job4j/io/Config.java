@@ -23,7 +23,7 @@ public class Config {
                     .filter(line -> !line.isEmpty())
                     .map(line -> line.split("=", 2))
                     .forEach(lines -> {
-                        if ((lines[1].equals("")) || (lines[0].equals(""))) {
+                        if (lines[1].isEmpty() || lines[0].isEmpty()) {
                             throw new IllegalArgumentException("неверные параметры пары ключ/значение");
                         }
                         values.put(lines[0], lines[1]);
