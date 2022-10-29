@@ -1,6 +1,13 @@
 package ru.job4j.io;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,48 +15,68 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ConfigTest {
 
     @Test
-    void whenPairWithoutComment() {
-        String path = "./data/pair_without_comment.properties";
-        Config config = new Config(path);
+    void whenPairWithoutComment(@TempDir Path tempDir) throws IOException {
+        File path = tempDir.resolve("path.txt").toFile();
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("name=postgres");
+        }
+        Config config = new Config(path.getAbsolutePath());
         config.load();
-        assertThat(config.value("name")).isEqualTo("Petr Arsentev");
+        assertThat(config.value("name")).isEqualTo("postgres");
     }
 
     @Test
-    void whenPairWithComment() {
-        String path = "./data/pair_with_comment.properties";
-        Config config = new Config(path);
+    void whenPairWithComment(@TempDir Path tempDir) throws IOException {
+        File path = tempDir.resolve("path.txt").toFile();
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("# PostgreSQL");
+            out.println("hibernate.connection.username=postgres");
+        }
+        Config config = new Config(path.getAbsolutePath());
         config.load();
         assertThat(config.value("hibernate.connection.username")).isEqualTo("postgres");
     }
 
     @Test
-    void whenPairWithTwoReg() {
-        String path = "./data/pair_with_two=.properties";
-        Config config = new Config(path);
+    void whenPairWithTwoReg(@TempDir Path temDir) throws IOException {
+        File path = temDir.resolve("path.txt").toFile();
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("hibernate.connection.username=postgres=3");
+        }
+        Config config = new Config(path.getAbsolutePath());
         config.load();
         assertThat(config.value("hibernate.connection.username")).isEqualTo("postgres=3");
     }
 
     @Test
-    void whenPairWithEmptyString() {
-        String path = "./data/with_empty_string.properties";
-        Config config = new Config(path);
+    void whenPairWithEmptyString(@TempDir Path temDir) throws IOException {
+        File path = temDir.resolve("path.txt").toFile();
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("");
+            out.println("hibernate.connection.username=postgres");
+        }
+        Config config = new Config(path.getAbsolutePath());
         config.load();
         assertThat(config.value("hibernate.connection.username")).isEqualTo("postgres");
     }
 
     @Test
-    void whenPairWithWrongArgument() throws IllegalArgumentException {
-        String path = "./data/with_wrong_argument.properties";
-        Config config = new Config(path);
+    void whenPairWithWrongArgument(@TempDir Path temDir) throws IllegalArgumentException, IOException {
+        File path = temDir.resolve("path.txt").toFile();
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("hibernate.connection.username=");
+        }
+        Config config = new Config(path.getAbsolutePath());
         Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
     }
 
     @Test
-    void whenPairWithWrongKeyArgument() throws IllegalArgumentException {
-        String path = "./data/with_wrong_key_argument.properties";
-        Config config = new Config(path);
+    void whenPairWithWrongKeyArgument(@TempDir Path temDir) throws IllegalArgumentException, IOException {
+        File path = temDir.resolve("path.txt").toFile();
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("=postgres");
+        }
+        Config config = new Config(path.getAbsolutePath());
         Throwable thrown = assertThrows(IllegalArgumentException.class, config::load);
     }
 }
