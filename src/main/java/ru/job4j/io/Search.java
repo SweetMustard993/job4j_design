@@ -10,8 +10,7 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         validate(args);
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".txt")).forEach(System.out::println);
+        search(Paths.get(args[0]), p -> p.toFile().getName().endsWith(".txt")).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
@@ -25,6 +24,9 @@ public class Search {
             throw new IllegalArgumentException("The values of the passed parameters are null");
         }
         if (Files.notExists(Paths.get(args[0]))) {
+            throw new IllegalArgumentException(String.format("Not exist %s", Paths.get(args[0]).toAbsolutePath()));
+        }
+        if (Files.isDirectory(Paths.get(args[0]))) {
             throw new IllegalArgumentException("The value of the first argument is not a directory");
         }
         if (args[1].startsWith(".") && args[1].length() > 1) {
