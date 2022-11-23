@@ -23,10 +23,11 @@ public class Search {
         if (args.length == 0) {
             throw new IllegalArgumentException("The values of the passed parameters are null");
         }
-        if (Files.notExists(Paths.get(args[0]))) {
-            throw new IllegalArgumentException(String.format("Not exist %s", Paths.get(args[0]).toAbsolutePath()));
+        Path path = Paths.get(args[0]);
+        if (Files.notExists(path)) {
+            throw new IllegalArgumentException(String.format("Not exist %s", args[0]));
         }
-        if (Files.isDirectory(Paths.get(args[0]))) {
+        if (!Files.isDirectory(path)) {
             throw new IllegalArgumentException("The value of the first argument is not a directory");
         }
         if (args[1].startsWith(".") && args[1].length() > 1) {
