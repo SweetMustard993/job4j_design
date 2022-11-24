@@ -30,7 +30,7 @@ public class Search {
         if (!Files.isDirectory(path)) {
             throw new IllegalArgumentException("The value of the first argument is not a directory");
         }
-        if (args[1].startsWith(".") && args[1].length() > 1) {
+        if (!args[1].startsWith(".") && args[1].length() < 2) {
             throw new IllegalArgumentException("The value is not an extension");
         }
     }
