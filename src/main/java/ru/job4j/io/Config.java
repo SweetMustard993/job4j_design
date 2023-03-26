@@ -13,6 +13,7 @@ public class Config {
     private final Map<String, String> values = new HashMap<String, String>();
 
     public Config(final String path) {
+
         this.path = path;
     }
 
@@ -22,11 +23,11 @@ public class Config {
                     .map(line -> line.contains("#") ? line.substring(0, line.indexOf('#')).trim() : line)
                     .filter(line -> !line.isEmpty())
                     .map(line -> line.split("=", 2))
-                    .forEach(lines -> {
-                        if (lines[1].isEmpty() || lines[0].isEmpty()) {
+                    .forEach(line -> {
+                        if (line[1].isEmpty() || line[0].isEmpty()) {
                             throw new IllegalArgumentException("неверные параметры пары ключ/значение");
                         }
-                        values.put(lines[0], lines[1]);
+                        values.put(line[0], line[1]);
                     });
         } catch (IOException e) {
             e.printStackTrace();
