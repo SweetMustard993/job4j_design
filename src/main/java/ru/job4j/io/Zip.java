@@ -19,13 +19,10 @@ public class Zip {
 
 
     public void packFiles(List<Path> sources, File target) {
-        List<File> sourcesFiles = sources.stream()
-                .map(Path::toFile)
-                .collect(Collectors.toList());
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            for (File source : sourcesFiles) {
-                zip.putNextEntry(new ZipEntry(source.getPath()));
-                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
+            for (Path source : sources) {
+                zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source.toFile().getPath()))) {
                     zip.write(out.readAllBytes());
                 }
             }
