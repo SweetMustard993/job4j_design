@@ -28,11 +28,11 @@ public class ConsoleChat {
         System.out.println("Для начала общения напишите что-нибудь в чат");
         String input = scanner.nextLine();
         log.add(input);
-        while (!input.equals(OUT)) {
-            if (input.equals(STOP)) {
+        while (!OUT.equals(input)) {
+            if (STOP.equals(input)) {
                 silenceActivated = true;
             }
-            if (input.equals(CONTINUE)) {
+            if (CONTINUE.equals(input)) {
                 silenceActivated = false;
             }
             if (!silenceActivated) {
