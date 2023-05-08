@@ -18,6 +18,12 @@ public class EchoServer {
                     if (str.contains("msg=Exit")) {
                         server.close();
                     }
+                    if (str.equals("msg=Hello")) {
+                        out.write("Hello, dear friend.".getBytes());
+                    }
+                    if (!str.contains("msg=Hello") && !str.contains("msg=Exit")) {
+                        out.write("What".getBytes());
+                    }
                     out.flush();
                 }
             }
