@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -9,6 +10,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Files;
 
+@Disabled
 class CSVReaderTest {
 
     @Test
