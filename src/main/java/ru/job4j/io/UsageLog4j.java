@@ -8,10 +8,15 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        try {
-            throw new Exception("Not supported code");
-        } catch (Exception e) {
-            LOG.error("Exception in log example", e);
-        }
+        byte one = 1;
+        short two = 2;
+        int three = 3;
+        long four = 4L;
+        float five = 5.0F;
+        double six = 6;
+        char seven = 'g';
+        boolean eight = true;
+        LOG.warn("first: {}, second: {}, third: {}, fourths: {}, fifth: {}, sixth: {}, seventh: {}, eighth: {}", one,
+                two, three, four, five, six, seven, eight);
     }
 }
