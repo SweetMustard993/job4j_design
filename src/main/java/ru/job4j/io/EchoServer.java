@@ -17,11 +17,9 @@ public class EchoServer {
                     System.out.println(str);
                     if (str.contains("msg=Exit")) {
                         server.close();
-                    }
-                    if (str.equals("msg=Hello")) {
+                    } else if (str.equals("msg=Hello")) {
                         out.write("Hello, dear friend.".getBytes());
-                    }
-                    if (!str.contains("msg=Hello") && !str.contains("msg=Exit")) {
+                    } else {
                         out.write("What".getBytes());
                     }
                     out.flush();
