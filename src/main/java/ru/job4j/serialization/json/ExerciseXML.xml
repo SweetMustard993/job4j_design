@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<student name="Vadim" age="30" budgetEducation="false">
+    <subjects>
+        <subject>мат. анализ</subject>
+        <subject>аналитическая геометрия</subject>
+        <subject>Химия</subject>
+    </subjects>
+    <certificate name="Vadim" studyYears="11"/>
+</student>
