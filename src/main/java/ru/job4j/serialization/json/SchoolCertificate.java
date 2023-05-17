@@ -19,4 +19,12 @@ public class SchoolCertificate {
                 + ", studyYears=" + studyYears
                 + '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStudyYears() {
+        return studyYears;
+    }
 }
