@@ -1,9 +1,5 @@
 package ru.job4j.find;
 
-import ru.job4j.io.SearchFiles;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,7 +17,7 @@ public class Find {
     public static final String TYPE = "t";
     public static final String OUT = "o";
     public static final String HINT = """
-            Для поиска файлов укажите, через пробел, пары ключ=значение для следущих параметров: -d - директория поиска файла
+            Для поиска файлов укажите, через ";", пары ключ=значение для следущих параметров: -d - директория поиска файла
             -n - имя файла, маска, либо регулярное выражение
             -t - тип поиска: mask искать по маске, name по полному совпадение имени, regex по регулярному выражению
             -o - файл для записи результатов""";
@@ -30,7 +26,7 @@ public class Find {
         System.out.println(HINT);
         Scanner scanner = new Scanner(System.in);
         String arguments = scanner.nextLine();
-        ArgsName argsName = ArgsName.of(arguments.split(" "));
+        ArgsName argsName = ArgsName.of(arguments.split(";"));
         validate(argsName);
         search(argsName).forEach(System.out::println);
     }
@@ -39,7 +35,9 @@ public class Find {
         String argValue = argsName.get(TYPE);
         Pattern result = Pattern.compile("");
         if (argValue.equals("mask")) {
-            argValue = argsName.get(NAME).replaceAll("\\*", ".*").replaceAll("\\?", ".{1}");
+            argValue = argsName.get(NAME).replaceAll("\\.", "[.]")
+                    .replaceAll("\\*", ".*")
+                    .replaceAll("\\?", ".{1}");
             result = Pattern.compile(argValue);
         }
         if (argValue.equals("name")) {

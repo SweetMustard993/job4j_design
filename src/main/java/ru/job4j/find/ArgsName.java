@@ -26,7 +26,7 @@ public class ArgsName {
     }
 
 
-    public static ArgsName of(String[] args) {
+    public static ArgsName of(String ... args) {
         ArgsName names = new ArgsName();
         names.validateArgs(args);
         names.parse(args);
