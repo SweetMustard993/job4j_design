@@ -35,7 +35,7 @@ public class Find {
         String argValue = argsName.get(TYPE);
         Pattern result = Pattern.compile("");
         if (argValue.equals("mask")) {
-            argValue = argsName.get(NAME).replaceAll("\\.", "[.]")
+            argValue = argsName.get(NAME).replaceAll(".", "[.]")
                     .replaceAll("\\*", ".*")
                     .replaceAll("\\?", ".{1}");
             result = Pattern.compile(argValue);
