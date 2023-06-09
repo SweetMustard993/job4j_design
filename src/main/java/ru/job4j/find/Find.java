@@ -36,8 +36,8 @@ public class Find {
         Pattern result = Pattern.compile("");
         if (argValue.equals("mask")) {
             argValue = argsName.get(NAME).replaceAll("\\.", "[.]")
-                    .replaceAll("\\*", ".*")
-                    .replaceAll("\\?", ".{1}");
+                    .replaceAll("\\?", ".{1}"
+                            .replaceAll("\\*", ".*"));
             result = Pattern.compile(argValue);
         }
         if (argValue.equals("name")) {
