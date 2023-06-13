@@ -19,3 +19,4 @@ insert into users (name, role_id) values ('admin', 1);
 insert into items (header, users_id, category_id,state_id) values ('test', 1, 3, 1);
 insert into comments (description, item_id) values ('test comment', 1);
 insert into attachs (attach, item_id) values ('src/main/java/ru/job4j/sql/1_to_1.jpg', 1);
+insert into attachs (attach, item_id) values ('src/main/java/ru/job4j/sql/1_to_many.jpg', 1);

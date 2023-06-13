@@ -16,9 +16,9 @@ rule text unique
 );
 
 create table roles_rules (
-role_id int references role (id),
-rule_id int references rule (id),
-primary key (role_id, rule_id)
+id serial primary key,
+role_id int references roles (id),
+rule_id int references rules (id)
 );
 
 create table categories (
