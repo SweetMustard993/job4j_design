@@ -24,13 +24,17 @@ name varchar(255),
 price decimal(10,2)
 );
 
-create table order_list (
+create table order_goods (
 order_id int references orders (id) not null,
 goods_id int references goods (id) not null,
 count int,
 primary key (order_id, goods_id)
 );
 
+create table company_car (
+car_id primary key,
+model text
+);
 
 create table drivers (
 telephone text primary key,
@@ -38,7 +42,3 @@ name varchar(255),
 car_id int references company_car (car_id) unique
 );
 
-create table company_car (
-car_id primary key,
-model text
-);
