@@ -1,0 +1,1 @@
+create database task_system template template0;

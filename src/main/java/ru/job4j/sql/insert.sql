@@ -1,0 +1,13 @@
+insert into roles (name) values ('admin');
+insert into roles (name) values ('operator');
+insert into roles (name) values ('user');
+insert into rules (rule) values ('create item');
+insert into rules (rule) values ('delete item');
+insert into rules (rule) values ('read item');
+insert into rules (rule) values ('update item');
+insert into categories (name) values ('problem');
+insert into categories (name) values ('setup');
+insert into categories (name) values ('task');
+insert into states (name) values ('new');
+insert into states (name) values ('in work');
+insert into states (name) values ('done');
