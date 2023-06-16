@@ -44,9 +44,10 @@ from product p
 where p.expired_date<current_date;
 
 
-select p.name as "название продукта", max(price)
-from product p
-group by p.name;
+select name, price from product
+where price in(
+   select max(price) from product
+);
 
 
 select t.name, count(type_id) as "количество продуктов"
