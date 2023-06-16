@@ -39,4 +39,3 @@ from client cl join adress ad on cl.id = ad.client_id;
 
 select cl.name as Имя, ad.adress as адрес, cl.sex as Пол
 from client cl join adress ad on cl.id = ad.client_id;
-
