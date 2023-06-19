@@ -72,4 +72,4 @@ insert into teens(name, gender) values ('mr','female');
 
 select t1.name, t1.gender, t2.name, t2.gender, (t1.gender, t2.gender)
 from teens t1 cross join teens t2
-where (t1.gender, t2.gender)=('male','female') or (t1.gender, t2.gender)=('female','male');
+where (t1.gender, t2.gender)=('male','female');
