@@ -12,7 +12,7 @@ $$
     BEGIN
         update products
         set price = price * 1.2
-        where id = (select id from inserted);
+        where id in (select id from inserted);
         return new;
     END;
 $$
@@ -29,9 +29,7 @@ create or replace function tax2()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price * 1.2
-        where id = new.id;
+        new.price = new.price * 1.2;
         return new;
     END;
 $$
@@ -62,7 +60,7 @@ $$
 language 'plpgsql';
 
 create trigger history_save
-	after insert on history_of_price
+	after insert on products
 	for each row
 	execute procedure save();
 
