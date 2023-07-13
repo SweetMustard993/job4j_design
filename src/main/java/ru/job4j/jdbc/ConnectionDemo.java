@@ -11,11 +11,12 @@ public class ConnectionDemo {
     public static final String PASSWORD = "password";
     public static final String LOGIN = "username";
     public static final String URL = "url";
+    public static final String DRIVER = "driver_class";
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
         String app = "C:\\projects\\job4j_design\\app.properties";
         Config config = new Config(app);
+        Class.forName(config.value(DRIVER));
         config.load();
         try (Connection connection = DriverManager.getConnection(config.value(URL), config.value(LOGIN), config.value(PASSWORD))) {
             DatabaseMetaData metaData = connection.getMetaData();
