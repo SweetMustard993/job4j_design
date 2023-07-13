@@ -16,8 +16,8 @@ public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         String app = "C:\\projects\\job4j_design\\app.properties";
         Config config = new Config(app);
-        Class.forName(config.value(DRIVER));
         config.load();
+        Class.forName(config.value(DRIVER));
         try (Connection connection = DriverManager.getConnection(config.value(URL), config.value(LOGIN), config.value(PASSWORD))) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());
