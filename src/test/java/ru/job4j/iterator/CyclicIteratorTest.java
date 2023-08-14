@@ -38,8 +38,11 @@ class CyclicIteratorTest {
     @Test
     void whenOneElementThenNext() {
         CyclicIterator<Integer> iterator = new CyclicIterator<>(List.of(1));
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(1);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(1);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(1);
     }
 
@@ -47,12 +50,18 @@ class CyclicIteratorTest {
     void whenNotEmptyThenNext() {
         CyclicIterator<Integer> iterator = new CyclicIterator<>(List.of(1, 2, 3));
         assertThat(iterator.next()).isEqualTo(1);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(2);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(3);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(1);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(2);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(3);
+        assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(1);
+        assertThat(iterator.hasNext()).isTrue();
     }
-
 }

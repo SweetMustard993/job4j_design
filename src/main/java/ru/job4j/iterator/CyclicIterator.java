@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 public class CyclicIterator<T> implements Iterator<T> {
 
     private List<T> data;
-    int index;
+    private int index;
 
     public CyclicIterator(List<T> data) {
         this.data = data;
@@ -15,15 +15,15 @@ public class CyclicIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return index < data.size();
+        return !data.isEmpty();
     }
 
     @Override
     public T next() {
-        if (data.isEmpty()) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        if (!hasNext()) {
+        if (!(index < data.size())) {
             index = 0;
         }
         return data.get(index++);
