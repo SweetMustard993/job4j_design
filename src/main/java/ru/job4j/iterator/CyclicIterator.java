@@ -15,14 +15,14 @@ public class CyclicIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        if (data.isEmpty()) {
-            throw new NoSuchElementException();
-        }
         return index < data.size();
     }
 
     @Override
     public T next() {
+        if (data.isEmpty()) {
+            throw new NoSuchElementException();
+        }
         if (!hasNext()) {
             index = 0;
         }
